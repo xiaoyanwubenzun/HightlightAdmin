@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.clear-float::after{
+  visibility: hidden;
+  display: block;
+  height: 0;
+  content: "";
+  clear: both;
+}
+.clear-float{
+  zoom: 1;
+}
+::-webkit-scrollbar {
+  //display: none;
+  width: 6px;
+  /* Chrome Safari */
+}
+::-webkit-scrollbar-thumb {
+  background: #99a9bf;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-track-piece {
+  background: #d3dce6;
+}
+/*#app {*/
+/*	min-width: 81.25rem;*/
+/*}*/
