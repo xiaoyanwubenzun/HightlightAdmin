@@ -291,6 +291,7 @@
 		width: 100%;
 		position: fixed;
 		display: block;
+		z-index: 100;
 	}
 	.user-message-span-name-header {
 		width: 100px;

@@ -1,9 +1,10 @@
 <template>
     <div>
-        <HighlightHeader class="header-whole-article"></HighlightHeader>
+        <HighlightHeader/>
         <div class="whole-article" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div>大家的动态</div>
+
         </div>
     </div>
 </template>
@@ -36,12 +37,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .header-whole-article {
-        width: 100%;
-        position: fixed;
-        display: block;
-        z-index: 100;
-    }
     .whole-article {
         height: 120vh;
         .empty-block {

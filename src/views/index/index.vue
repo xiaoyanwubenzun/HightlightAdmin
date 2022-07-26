@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader class="indexheader"></HighlightHeader>
+        <HighlightHeader/>
         <div class="indexmain" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div class="search">
@@ -365,16 +365,6 @@
 </script>
 
 <style lang="scss">
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    .indexheader {
-        width: 100%;
-        position: fixed;
-        display: block;
-        z-index: 100;
-    }
     .right {
         float: right !important;
     }

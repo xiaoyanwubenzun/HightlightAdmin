@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader @send="getUserInfo"></HighlightHeader>
+        <HighlightHeader @send="getUserInfo"/>
         <div class="upload-main">
             <div class="upload-cover">
                 <p class="upload-cover-p">上传视频封面</p>
@@ -536,9 +536,6 @@
         background-position: center;
         background-size: cover;
         background-position-y: 61px;
-        .empty-block {
-            height: 61px;
-        }
         .upload-cover {
             position: relative;
             top: 180px;

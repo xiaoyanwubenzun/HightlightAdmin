@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader class="header-user-article"></HighlightHeader>
+        <HighlightHeader/>
         <div class="user-article" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div>我的动态</div>
@@ -36,12 +36,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .header-user-article {
-        width: 100%;
-        position: fixed;
-        display: block;
-        z-index: 100;
-    }
     .user-article {
         height: 120vh;
         .empty-block {

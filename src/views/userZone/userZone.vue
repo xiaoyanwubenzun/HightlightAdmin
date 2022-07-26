@@ -1,22 +1,10 @@
 <template>
     <div>
-        <HighlightHeader class="header-user-zone"></HighlightHeader>
+        <HighlightHeader/>
         <div class="user-highlight" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div class="user-message-head">
                 <div v-if="user_info.user_name" class="message-user">
-<!--                    <img-->
-<!--                            class="whosuserimg"-->
-<!--                            :src="user_info.user_img"-->
-<!--                            alt="图片加载中"-->
-<!--                    />-->
-<!--                    <span class="whosname">{{ user_info.user_name }}</span>-->
-<!--                    <i class="whosgender">-->
-<!--                        <img :src="user_info.user_gender===0?'../../img/icons/wan_sex_unknow.png':(user_info.user_gender===1?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="" width="16" height="16"/>-->
-<!--                    </i>-->
-<!--                    <i class="whosage">-->
-<!--                        <span>{{ user_info.user_age }}</span>-->
-<!--                    </i>-->
                     <span class="user-ranking">本站贡献排名：{{ user_info.ranking }}</span>
                     <div style="display: flex;align-items: center;">
                         <div style="display: flex;align-items: center;margin-left: 10px">
@@ -86,51 +74,31 @@
                                         <p>
                                             {{item.vtext == "" ? "这位用户很懒，没有写文字内容哦" : item.vtext }}
                                         </p>
-                                        <p
-                                                data-we-empty-p=""
-                                                style="text-align: center"
-                                        ></p>
+                                        <p data-we-empty-p="" style="text-align: center"></p>
                                     </div>
                                     <div class="type-user">
                                         <div class="video-type">
-                                            <i
-                                            ><img
-                                                    src="../../assets/index/game.png"
-                                                    alt="图片加载失败"
-                                            /></i>
+                                            <i><img src="../../assets/index/game.png" alt="图片加载失败"/></i>
                                             <span>{{ item.videotype }}</span>
                                         </div>
                                         <div class="video-user">
-                                            <i
-                                            ><img
-                                                    src="../../assets/index/user.png"
-                                                    alt="图片加载失败"
-                                            /></i>
+                                            <i><img src="../../assets/index/user.png" alt="图片加载失败"/></i>
                                             <span>{{ item.username }}</span>
                                         </div>
                                     </div>
                                     <div class="video-popular-get">
                                         <ul class="clear-float">
                                             <li>
-                                                <i class="el-icon-video-play"></i>
-                                                浏览：{{ item.watchnum }}
+                                                <i class="el-icon-video-play"></i>浏览：{{ item.watchnum }}
                                             </li>
                                             <li>
-                                                <i class="el-icon-star-off"></i>
-                                                获赞：{{ item.likecount }}
+                                                <i class="el-icon-star-off"></i>获赞：{{ item.likecount }}
                                             </li>
                                             <li>
-                                                <i
-                                                        class="el-icon-chat-dot-square"
-                                                ></i>
-                                                评论：{{ item.cnum }}
+                                                <i class="el-icon-chat-dot-square"></i>评论：{{ item.cnum }}
                                             </li>
                                             <li>
-                                                发布日期：{{
-                                                new Date(
-                                                item.createtime
-                                                ).toLocaleDateString()
-                                                }}
+                                                发布日期：{{new Date(item.createtime).toLocaleDateString() }}
                                             </li>
                                         </ul>
                                     </div>
@@ -159,7 +127,6 @@
                         @keydown.enter="searchVideo()"
                 />
             </div>
-
         </div>
     </div>
 </template>
@@ -321,12 +288,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .header-user-zone {
-        width: 100%;
-        position: fixed;
-        display: block;
-        z-index: 100;
-    }
     .user-highlight {
         height: 120vh;
         .empty-block {

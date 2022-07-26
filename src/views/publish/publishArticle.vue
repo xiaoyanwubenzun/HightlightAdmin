@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader class="header-publish-article"></HighlightHeader>
+        <HighlightHeader/>
         <div class="publish-article" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div>发布动态</div>

@@ -1,6 +1,5 @@
 <template>
     <div>
-<!--        <HighlightHeader @send="getUserInfo" class="uheader"></HighlightHeader>-->
         <div class="user-message" :style="backgroundStyle">
             <div class="my-message">
                 <div class="user-message-head">
@@ -192,12 +191,12 @@
                                         :on-success="handleAvatarSuccess"
                                         :before-upload="beforeAvatarUpload"
                                 >
-                                    <span style="font-size: 16px;">修改</span>
+                                    <span style="font-size: 12px;">更换头像</span>
                                 </el-upload>
                             </span>
                         </div>
                         <div style="margin-top: 20px;text-align: left">
-                            <span style="line-height: 36px;white-space: nowrap">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
+                            <span style="line-height: 36px;white-space: nowrap">性&nbsp;&nbsp;&ensp;&ensp;&ensp;别：</span>
                             <div style="width: 200px;display: inline-block">
                                 <el-radio-group v-model="edit_user_data.user_gender">
                                     <el-radio :label="0">
@@ -229,7 +228,7 @@
                             </div>
                         </div>
                         <div style="margin-top: 20px;display: flex">
-                            <span style="line-height: 36px;white-space: nowrap">喜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢：</span>
+                            <span style="line-height: 36px;white-space: nowrap">喜&nbsp;&nbsp;&ensp;&ensp;&ensp;欢：</span>
                             <div style="width: 200px;display: inline-block">
                                 <el-select
                                         v-model="edit_user_data.user_game_like"
@@ -263,7 +262,7 @@
                             </div>
                         </div>
                         <div style="margin-top: 20px;display: flex">
-                            <span style="line-height: 36px;white-space: nowrap">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保：</span>
+                            <span style="line-height: 36px;white-space: nowrap">密&nbsp;&nbsp;&ensp;&ensp;&ensp;保：</span>
                             <div style="width: 200px;display: inline-block">
                                 <el-input
                                         v-model="edit_user_data.user_mibao"
@@ -271,7 +270,7 @@
                                         size="medium"
                                 ></el-input>
                             </div>
-                            <span style="line-height: 36px;white-space: nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>
+                            <span style="line-height: 36px;white-space: nowrap">&nbsp;&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>
                             <div style="width: 200px;display: inline-block">
                                 <el-input
                                         v-model="edit_user_data.user_phone"
@@ -328,7 +327,6 @@
     import { getUserRanking,updateUserMessage } from "@/api/user";
     import { getUserHighLight } from "@/api/video";
     import { deepClone } from "@/filters";
-    import { uploadImg } from "@/api/upload";
     export default {
         name: "userMessage",
         components: {},
@@ -547,7 +545,7 @@
     };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .super-market-el-dialog .el-dialog__header {
         padding: 5px 0;
         background-color: #F2F2F2;
@@ -567,10 +565,6 @@
     .user-message {
         height: 120vh;
         position: relative;
-    }
-    .uheader {
-        position: fixed;
-        z-index: 100;
     }
     .img-head-user {
         /*margin: 10px 0 0 10px;*/

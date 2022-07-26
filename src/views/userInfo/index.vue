@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader ref="highlight-header" @send="getUserInfo" class="uheader"></HighlightHeader>
+        <HighlightHeader ref="highlight-header" @send="getUserInfo"/>
         <template v-if="show_son">
             <userMessage @refresh="needReload" :userInfo="user_info"></userMessage>
         </template>
@@ -32,7 +32,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
 

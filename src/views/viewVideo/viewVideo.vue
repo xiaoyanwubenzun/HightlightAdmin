@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader class="header-view-video"></HighlightHeader>
+        <HighlightHeader/>
         <div class="view-video clear-float" :style="backgroundStyle">
             <div class="author-message">
                 <div class="author-img-name">
@@ -38,25 +38,13 @@
                 <div class="author-personal-message">
                     <ul>
                         <li>
-                            <i class=""></i>
-                            <span>
-								星座：
-								<i>{{ user_info.consttell }}</i>
-							</span>
+                            <span>星座：<i>{{ user_info.consttell }}</i></span>
                         </li>
                         <li>
-                            <i class=""></i>
-                            <span>
-								喜欢的游戏：
-								<i>{{ user_info.gamelike }}</i>
-							</span>
+                            <span>喜欢的游戏：<i>{{ user_info.gamelike }}</i></span>
                         </li>
                         <li>
-                            <i class=""></i>
-                            <span>
-								个性签名：
-								<i>{{ user_info.usersign }}</i>
-							</span>
+                            <span>个性签名：<i>{{ user_info.usersign }}</i></span>
                         </li>
                     </ul>
                 </div>
@@ -327,7 +315,7 @@
                     this.$message.warning("评论不能为空哦");
                     return;
                 }
-                let res = await createComment({uid: this.user_info.uid,vid: this.vid,content: this.comment,}).then(res => res).catch((err) => {console.log(err)});
+                let res = await createComment({uid: this.user_info.uid, what_id: this.vid, comment_content: this.comment, comment_type: 1}).then(res => res).catch((err) => {console.log(err)});
                 if(res){
                     if(res.code===200){
                         this.$message.success(res.message);
@@ -374,11 +362,7 @@
     };
 </script>
 
-<style lang="scss">
-    .header-view-video {
-        position: fixed;
-        z-index: 100;
-    }
+<style lang="scss" scoped>
     .view-video {
         height: 120vh;
         /*height: 1296px;*/

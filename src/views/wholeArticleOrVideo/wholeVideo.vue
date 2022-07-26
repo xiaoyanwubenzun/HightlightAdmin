@@ -1,6 +1,6 @@
 <template>
     <div>
-        <HighlightHeader class="all-highlight-header"></HighlightHeader>
+        <HighlightHeader/>
         <div class="all-highlight clear-float" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div class="user-best-video">

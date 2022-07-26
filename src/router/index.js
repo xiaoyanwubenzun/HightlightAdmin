@@ -42,7 +42,6 @@ export const routes = [
 		isMenu: false,
 		children: []
 	},
-
 	{
 		path: "/index",
 		name: "index",
