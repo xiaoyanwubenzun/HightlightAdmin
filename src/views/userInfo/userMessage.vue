@@ -4,15 +4,6 @@
             <div class="my-message">
                 <div class="user-message-head">
                     <div v-if="user_info.user_name" class="message-main">
-<!--                        <img-->
-<!--                                class="whosuserimg"-->
-<!--                                :src="user_info.user_img"-->
-<!--                                alt="图片加载中"-->
-<!--                        />-->
-<!--                        <span class="whosname">{{ user_info.user_name }}</span>-->
-<!--                        <i class="whosgender"><img :src="user_info.gender==='0'?'../../img/icons/wan_sex_unknow.png':(user_info.gender==='1'?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="图片加载中"-->
-<!--                        /></i>-->
-<!--                        <i class="whosage"><span>{{ user_info.user_age }}</span></i>-->
                         <span style="color: #559ad5;font-size: 16px;position: absolute;right: 25%;top: 36%;cursor: pointer">
                             <el-tooltip
                                     class="item"
@@ -32,7 +23,7 @@
                                 <span class="user-message-span-name">{{ user_info.user_name }}</span>
                                 <span class="user-message-span-else">
                                 <span style="line-height: 16px">
-                                    <img :src="user_info.user_gender===0?'../../img/icons/wan_sex_unknow.png':(user_info.user_gender===1?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="" width="16" height="16"/>
+                                    <img :src="user_info.user_gender===0?'/img/icons/gender_unknow.png':(user_info.user_gender===1?'/img/icons/gender_man.png':'/img/icons/gender_woman.png')" alt="" width="16" height="16"/>
                                 </span>
                                 <span style="color: #ffd048;padding-left: 20px;font-size: 16px;line-height: 16px">{{user_info.user_age}}</span>
                             </span>
@@ -100,14 +91,14 @@
                                         <div class="type-user">
                                             <div class="video-type">
                                                 <i><img
-                                                        src="../../assets/index/game.png"
+                                                        src="/img/icons/game.png"
                                                         alt="图片加载失败"
                                                 /></i>
                                                 <span>{{ item.videotype }}</span>
                                             </div>
                                             <div class="video-user">
                                                 <i><img
-                                                        src="../../assets/index/user.png"
+                                                        src="/img/icons/user.png"
                                                         alt="图片加载失败"
                                                 /></i>
                                                 <span>{{ item.username }}</span>
@@ -124,13 +115,11 @@
                                                     获赞：{{ item.likecount }}
                                                 </li>
                                                 <li>
-                                                    <i
-                                                            class="el-icon-chat-dot-square"
-                                                    ></i>
+                                                    <i class="el-icon-chat-dot-square"></i>
                                                     评论：{{ item.cnum }}
                                                 </li>
                                                 <li>
-                                                    发布日期：{{new Date(item.createtime).toLocaleDateString() }}
+                                                    发布日期：{{new Date(item.create_time).toLocaleDateString() }}
                                                 </li>
                                             </ul>
                                         </div>
@@ -173,7 +162,7 @@
         <el-dialog
                 title="编辑个人信息"
                 :visible.sync="show_edit_user_message"
-                custom-class="super-market-el-dialog"
+                custom-class="highlight-el-dialog"
                 top="30vh"
                 width="35%"
                 center
@@ -201,17 +190,17 @@
                                 <el-radio-group v-model="edit_user_data.user_gender">
                                     <el-radio :label="0">
                                         <span style="line-height: 16px">
-                                            <img :src="'../../img/icons/wan_sex_unknow.png'" alt="" width="16" height="16">
+                                            <img src="/img/icons/gender_unknow.png" alt="" width="16" height="16">
                                         </span>
                                     </el-radio>
                                     <el-radio :label="1">
                                         <span style="line-height: 16px">
-                                            <img :src="'../../img/icons/wan_sex_m.png'" alt="" width="16" height="16">
+                                            <img src="/img/icons/gender_man.png" alt="" width="16" height="16">
                                         </span>
                                     </el-radio>
                                     <el-radio :label="2">
                                         <span style="line-height: 16px">
-                                            <img :src="'../../img/icons/wan_sex_w.png'" alt="" width="16" height="16">
+                                            <img src="/img/icons/gender_woman.png" alt="" width="16" height="16">
                                         </span>
                                     </el-radio>
                                 </el-radio-group>
@@ -307,6 +296,7 @@
                         type="primary"
                         size="medium"
                         @click="updateUserMessage()"
+                        v-preventReClick="3000"
                 >
                     保 存
                 </el-button>
@@ -322,7 +312,6 @@
 </template>
 
 <script>
-    // import HighlightHeader from "@/components/HighlightHeader.vue";
     import { getToken } from "@/utils/auth";
     import { getUserRanking,updateUserMessage } from "@/api/user";
     import { getUserHighLight } from "@/api/video";
@@ -453,7 +442,7 @@
                 }
             },
             async searchUserVideo() {
-                let res = await getUserHighLight({ uid: this.$store.getters.user_info.uid, keyword: this.keyword, pagenum: this.now_page }).then(res => res).catch((err) => {console.log(err)});
+                let res = await getUserHighLight({ uid: this.$store.getters.user_info.uid, keyword: this.keyword, page_num: this.now_page }).then(res => res).catch((err) => {console.log(err)});
                 if(res){
                     if(res.code===200){
                         this.video_list = deepClone(res.data.videoList);
@@ -546,22 +535,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .super-market-el-dialog .el-dialog__header {
-        padding: 5px 0;
-        background-color: #F2F2F2;
-        border-bottom: 1px solid #DEE3EF;
-    }
-    .super-market-el-dialog.el-dialog {
-        position: relative;
-        margin: 0 auto 50px;
-        border-radius: 1px;
-        -webkit-box-shadow: none;
-        width: 50%;
-        border: 1px solid #DEE3EF;
-    }
-    .super-market-el-dialog .el-dialog__headerbtn {
-        top: 5px;
-    }
     .user-message {
         height: 120vh;
         position: relative;
@@ -860,7 +833,7 @@
                     .v-icon {
                         width: 3.125rem;
                         height: 3.125rem;
-                        background: url("../../assets/index/play.png") no-repeat;
+                        background: url("/img/icons/play.png") no-repeat;
                         background-size: cover;
                         position: absolute;
                         left: 4.6875rem;

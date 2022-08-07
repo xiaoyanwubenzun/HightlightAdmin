@@ -11,7 +11,7 @@
             <div class="logina">
                 <h1 class="logintitle">集锦系统登录</h1>
                 <div class="line">
-                    <img class="smallImg" src="../../assets/login/icon3.png" />
+                    <img class="smallImg" src="/img/icons/login_user.png" />
                     <input
                             placeholder="请输入账号"
                             type="text"
@@ -22,7 +22,7 @@
                 >用户名错误</span
                 >
                 <div class="line">
-                    <img class="smallImg" src="../../assets/login/icon4.png" />
+                    <img class="smallImg" src="/img/icons/login_pass.png" />
                     <input
                             placeholder="请输入密码"
                             type="password"
@@ -348,19 +348,19 @@
 
     #bg1 {
         height: 100vh;
-        background: url("../../assets/login/loldemo.jpg") no-repeat;
+        background: url("/img/backgroundImage/lol_background.jpg") no-repeat;
         background-size: cover;
     }
 
     #bg2 {
         height: 100vh;
-        background: url("../../assets/login/cfdemo.jpg") no-repeat;
+        background: url("/img/backgroundImage/cf_background.jpg") no-repeat;
         background-size: cover;
     }
 
     #bg3 {
         height: 100vh;
-        background: url("../../assets/login/pubgdemo.jpg") no-repeat;
+        background: url("/img/backgroundImage/pubg_background.jpg") no-repeat;
         background-size: cover;
     }
 </style>

@@ -196,7 +196,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: url("../../assets/zhuce/images10.png");
+        background-image: url("/img/backgroundImage/background_logon.png");
         background-size: cover;
     }
     .zhuce {

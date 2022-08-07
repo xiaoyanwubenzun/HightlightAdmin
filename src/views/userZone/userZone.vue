@@ -14,7 +14,7 @@
                             <span class="user-message-span-name">{{ user_info.user_name }}</span>
                             <span class="user-message-span-else">
                                 <span style="line-height: 16px">
-                                    <img :src="user_info.user_gender===0?'../../img/icons/wan_sex_unknow.png':(user_info.user_gender===1?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="" width="16" height="16"/>
+                                    <img :src="user_info.user_gender===0?'/img/icons/gender_unknow.png':(user_info.user_gender===1?'/img/icons/gender_man.png':'/img/icons/gender_woman.png')" alt="" width="16" height="16"/>
                                 </span>
                                 <span style="color: #ffd048;padding-left: 20px;font-size: 16px;line-height: 16px">{{user_info.user_age}}</span>
                             </span>
@@ -78,11 +78,11 @@
                                     </div>
                                     <div class="type-user">
                                         <div class="video-type">
-                                            <i><img src="../../assets/index/game.png" alt="图片加载失败"/></i>
+                                            <i><img src="/img/icons/game.png" alt="图片加载失败"/></i>
                                             <span>{{ item.videotype }}</span>
                                         </div>
                                         <div class="video-user">
-                                            <i><img src="../../assets/index/user.png" alt="图片加载失败"/></i>
+                                            <i><img src="/img/icons/user.png" alt="图片加载失败"/></i>
                                             <span>{{ item.username }}</span>
                                         </div>
                                     </div>
@@ -253,7 +253,7 @@
                 }
             },
             async searchVideo() {
-                let res = await getUserHighLight({ uid: this.$route.query.uid, keyword: this.keyword, pagenum: this.now_page }).then(res => res).catch((err) => {console.log(err)});
+                let res = await getUserHighLight({ uid: this.$route.query.uid, keyword: this.keyword, page_num: this.now_page }).then(res => res).catch((err) => {console.log(err)});
                 if(res){
                     if(res.code===200){
                         this.video_list = res.data.videoList;
@@ -525,7 +525,7 @@
                     .v-icon {
                         width: 3.125rem;
                         height: 3.125rem;
-                        background: url("../../assets/index/play.png") no-repeat;
+                        background: url("/img/icons/play.png") no-repeat;
                         background-size: cover;
                         position: absolute;
                         left: 4.6875rem;

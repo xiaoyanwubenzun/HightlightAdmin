@@ -36,12 +36,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .header-publish-article {
-        width: 100%;
-        position: fixed;
-        display: block;
-        z-index: 100;
-    }
     .publish-article {
         height: 120vh;
         .empty-block {

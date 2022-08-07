@@ -27,6 +27,33 @@ html {
   padding: 0;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+.clear-float::after{
+  visibility: hidden;
+  display: block;
+  height: 0;
+  content: "";
+  clear: both;
+}
+.clear-float{
+  zoom: 1;
+}
+//::-webkit-scrollbar {
+//  //display: none;
+//  width: 6px;
+//  /* Chrome Safari */
+//}
+//::-webkit-scrollbar-thumb {
+//  background: #99a9bf;
+//  border-radius: 20px;
+//}
+//::-webkit-scrollbar-track-piece {
+//  background: #d3dce6;
+//}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -228,4 +255,21 @@ code {
 
 .multiselect--active {
   z-index: 1000 !important;
+}
+
+.highlight-el-dialog .el-dialog__header {
+  padding: 5px 0;
+  background-color: #F2F2F2;
+  border-bottom: 1px solid #DEE3EF;
+}
+.highlight-el-dialog.el-dialog {
+  position: relative;
+  margin: 0 auto 50px;
+  border-radius: 1px;
+  -webkit-box-shadow: none;
+  width: 50%;
+  border: 1px solid #DEE3EF;
+}
+.highlight-el-dialog .el-dialog__headerbtn {
+  top: 5px;
 }

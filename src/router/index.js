@@ -1,17 +1,9 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import fa
-	from "element-ui/src/locale/lang/fa";
 
 Vue.use(VueRouter)
 
 export const routes = [
-	// {
-	// 	path: "/hightlightheader",
-	// 	name: "Hightlightheader",
-	// 	component: () => import("@/components/Hightlightheader.vue"),
-	// 	isMenu: false
-	// },
 	{
 		path: "/",
 		name: "login",

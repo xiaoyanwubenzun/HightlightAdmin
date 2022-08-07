@@ -324,7 +324,7 @@
     .bigmain {
         width: 100vw;
         height: 100vh;
-        background-image: url("../../assets/forgetpass/background.jpg");
+        background-image: url("/img/backgroundImage/background_forget_password.jpg");
         background-size: cover;
         .forgetpasshead {
             color: #128290;

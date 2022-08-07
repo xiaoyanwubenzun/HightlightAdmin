@@ -1,12 +1,12 @@
 <template>
     <div>
         <HighlightHeader/>
-        <div class="indexmain" :style="backgroundStyle">
+        <div class="index-main" :style="backgroundStyle">
             <div class="empty-block"></div>
             <div class="search">
-                <div class="nowtime">
-                    <h1 v-text="nowtime">17:00</h1>
-                    <p v-text="daydate"></p>
+                <div class="now-time">
+                    <h1 v-text="now_time">17:00</h1>
+                    <p v-text="day_date"></p>
                 </div>
                 <input
                         class="input"
@@ -18,77 +18,69 @@
             </div>
             <div class="result">
                 <template v-if="video_list.length>0">
-                    <div class="bestvideo">
-                        <div class="biaoti">
-                            <i
-                            ><img
-                                    src="../../assets/index/hot.png"
-                                    alt="图片加载失败"
-                            /></i>
+                    <div class="best-video">
+                        <div class="best-video-title">
+                            <i>
+                                <img src="/img/icons/hot.png" alt="图片加载失败"/>
+                            </i>
                             <h3>本周热度冠军</h3>
                         </div>
-                        <div class="bestuser">
-                            <i
-                            ><img
-                                    src="../../assets/index/king.png"
-                                    alt="图片加载失败"
-                            /></i>
-                            <i
-                            ><img :src="bestvideo.userimg" alt="头像加载失败" />
-                                <span>{{ bestvideo.username }}</span>
+                        <div class="best-video-user">
+                            <i>
+                                <img src="/img/icons/king.png" alt="图片加载失败"/>
+                            </i>
+                            <i>
+                                <img :src="best_video.userimg" alt="头像加载失败" />
+                                <span>{{ best_video.username }}</span>
                             </i>
                         </div>
-                        <div class="bestvideomain">
-                            <div class="bestvideotitle">
-                                <h4>{{ bestvideo.vtitle }}</h4>
+                        <div class="best-video-main">
+                            <div class="best-video-title-real">
+                                <h4>{{ best_video.vtitle }}</h4>
                             </div>
-                            <div class="eachvideo">
+                            <div class="each-video">
                                 <a
-                                        :href="'/view-video?vid=' + bestvideo.vid"
+                                        :href="'/view-video?vid=' + best_video.vid"
                                         class="v-lnk"
                                 ><img
-                                        :src="bestvideo.fengmian"
+                                        :src="best_video.fengmian"
                                         width="100%"
                                         height="100%"
-                                        alt="封面加载错误" />
+                                        alt="封面加载错误"
+                                />
                                     <div class="v-overlay"></div>
-                                    <span class="v-icon"></span
-                                    ></a>
+                                    <span class="v-icon"></span></a>
                             </div>
-                            <div class="bestvideomessage">
+                            <div class="best-video-message">
                                 <ul>
                                     <li>
-                                        <i class="el-icon-video-play"></i
-                                        ><span>{{ bestvideo.watchnum }}</span>
+                                        <i class="el-icon-video-play"></i>
+                                        <span>{{ best_video.watchnum }}</span>
                                     </li>
                                     <li>
-                                        <i class="el-icon-star-off"></i
-                                        ><span>{{ bestvideo.likecount }}</span>
+                                        <i class="el-icon-star-off"></i>
+                                        <span>{{ best_video.likecount }}</span>
                                     </li>
                                     <li>
-                                        <i class="el-icon-chat-dot-square"
-                                        ><span>{{ bestvideo.cnum }}</span></i
-                                        ><i
-                                    ><img
-                                            src="../../assets/index/game.png"
-                                            alt=""
-                                    /><span>{{
-											bestvideo.videotype
-										}}</span></i
-                                    >
+                                        <i class="el-icon-chat-dot-square">
+                                            <span>{{ best_video.cnum }}</span>
+                                        </i>
+                                        <i>
+                                            <img src="/img/icons/game.png" alt=""/>
+                                            <span>{{best_video.videotype}}</span>
+                                        </i>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="video-list">
-                        <!-- v-for="item in video_list" :key="item.vid" -->
                         <div
                                 v-for="(item,index) in video_list"
                                 :key="index"
-                                class="containeachvideo"
+                                class="contain-each-video"
                         >
-                            <div class="eachvideo">
+                            <div class="each-video">
                                 <a
                                         class="v-lnk"
                                         :href="'/view-video?vid=' + item.vid"
@@ -97,9 +89,9 @@
                                     <div class="v-overlay"></div>
                                     <span class="v-icon"></span>
                                 </a>
-                                <div class="videomessage">
-                                    <h3 class="videotitle">{{ item.vtitle }}</h3>
-                                    <div class="videocontent">
+                                <div class="video-message">
+                                    <h3 class="video-title">{{ item.vtitle }}</h3>
+                                    <div class="video-content">
                                         <p>
                                             {{item.vtext == "" ? "这位用户很懒，没有写文字内容哦" : item.vtext }}
                                         </p>
@@ -108,25 +100,21 @@
                                                 style="text-align: center"
                                         ></p>
                                     </div>
-                                    <div class="typeanduser">
-                                        <div class="videotype">
-                                            <i
-                                            ><img
-                                                    src="../../assets/index/game.png"
-                                                    alt="图片加载失败"
-                                            /></i>
+                                    <div class="type-user">
+                                        <div class="video-type">
+                                            <i>
+                                                <img src="/img/icons/game.png" alt="图片加载失败"/>
+                                            </i>
                                             <span>{{ item.videotype }}</span>
                                         </div>
-                                        <div class="videouser">
-                                            <i
-                                            ><img
-                                                    src="../../assets/index/user.png"
-                                                    alt="图片加载失败"
-                                            /></i>
+                                        <div class="video-user">
+                                            <i>
+                                                <img src="/img/icons/user.png" alt="图片加载失败"/>
+                                            </i>
                                             <span>{{ item.username }}</span>
                                         </div>
                                     </div>
-                                    <div class="sangezhibiao">
+                                    <div class="video-popular-get">
                                         <ul class="clear-float">
                                             <li>
                                                 <i class="el-icon-video-play"></i>
@@ -137,13 +125,11 @@
                                                 获赞：{{ item.likecount }}
                                             </li>
                                             <li>
-                                                <i
-                                                        class="el-icon-chat-dot-square"
-                                                ></i>
+                                                <i class="el-icon-chat-dot-square"></i>
                                                 评论：{{ item.cnum }}
                                             </li>
                                             <li>
-                                                发布日期：{{new Date(item.createtime).toLocaleDateString()}}
+                                                发布日期：{{new Date(item.create_time).toLocaleDateString()}}
                                             </li>
                                         </ul>
                                     </div>
@@ -151,11 +137,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="choosepage">
+                    <div class="choose-page">
                         <el-pagination
                                 background
                                 layout="prev, pager, next"
-                                :total="totalpage"
+                                :total="total_page"
                                 @current-change="currentChange"
                         >
                         </el-pagination>
@@ -164,7 +150,6 @@
                 <template v-else>
                     <span style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);color: #606266">未查询到内容</span>
                 </template>
-
             </div>
         </div>
     </div>
@@ -179,125 +164,49 @@
         data() {
             return {
                 backgroundStyle: "",
-                nowtime: "",
-                daydate: "",
-                beginnowtime: "",
-                totalpage: 1000,
-                // keyarr:[],
+                now_time: "",
+                day_date: "",
+                begin_now_time: "",
+                total_page: 1000,
                 keyword: "",
-                pagenum: 1,
+                page_num: 1,
                 video_list: [],
-                bestvideo: {},
+                best_video: {},
             };
         },
-        watch: {
-            // keyword() {
-            //     if (this.keyword == "") {
-            //         this.searchallvideo();
-            //     }
-            // },
-        },
+        watch: {},
         methods: {
             async searchVideo() {
                 let data = {
                     keyword: this.keyword,
-                    pagenum: "1"
+                    page_num: this.page_num
                 };
                 let res = await getVideoList(data).then(res => res).catch((err) => {console.log(err);});
                 if(res){
                     if(res.code===200){
                         this.video_list = res.data.data_list;
-                        this.totalpage = res.data.total;
+                        this.total_page = res.data.total;
                     } else {
                         this.$message.error(res.message);
                     }
                 }
-
-                // let data = {
-                // 	keyword: this.keyword,
-                // 	pagenum: "1"
-                // };
-                // getVideoList(data).then(res => {
-                // 	console.log("searchvideo");
-                // 	// return res;
-                // 	switch (res.code) {
-                // 		case 200:
-                // 			this.video_list = res.data.data_list;
-                // 			this.totalpage = res.data.total;
-                // 			break;
-                // 		case 0:
-                // 			this.$message.error(res.message);
-                // 			break;
-                // 		default:
-                // 			break;
-                // 	}
-                // 	}).catch((err) => {console.log(err);});
             },
             async searchBestVideo() {
                 let res = await getHottestVideoData().then((res) => res).catch((err) => {console.log(err);});
                 if(res){
                     if(res.code===200){
-                        this.bestvideo = res.data.hottest_video;
+                        this.best_video = res.data.hottest_video;
                     } else {
                         this.$message.error(res.message);
                     }
                 }
-
-                // getHottestVideoData().then((res) => {
-                // 	console.log("searchBestVideo");
-                // 	// return res;
-                // 	switch (res.code) {
-                // 		case 200:
-                // 			this.bestvideo = res.data.hottest_video;
-                // 			break;
-                // 		case 0:
-                // 			this.$message.error(res.message);
-                // 			break;
-                // 		default:
-                // 			break;
-                // 	}
-                // 	}).catch((err) => {console.log(err);});
-
             },
             currentChange(val) {
-                this.pagenum = val;
+                this.page_num = val;
                 this.searchVideo();
             },
-            // searchallvideo() {
-                // this.searchVideo();
-                // if (this.keyword) {
-                    // this.searchvideo();
-                    // this.keyarr=this.video_list;
-                    // this.keyarr.forEach(items => {
-                    //   // console.log(items.vtitle);
-                    //   if(items.vtitle.indexOf(this.keyword)!==-1||items.vtext.indexOf(this.keyword)!==-1||items.videotype.indexOf(this.keyword)!==-1||items.username.indexOf(this.keyword)!==-1){
-                    //           items.vtitle=items.vtitle.replace(
-                    //               new RegExp(this.keyword,"gm"),
-                    //               `<span style="color:red">${this.keyword}</span>`
-                    //           );
-                    //           items.vtext=items.vtext.replace(
-                    //               new RegExp(this.keyword,"gm"),
-                    //               `<span style="color:red">${this.keyword}</span>`
-                    //           );
-                    //           // items.videotype=items.videotype.replace(
-                    //           //     new RegExp(this.keyword,"gm"),
-                    //           //     `<span style="color:red">${this.keyword}</span>`
-                    //           // );
-                    //           // items.username=items.username.replace(
-                    //           //     new RegExp(this.keyword,"gm"),
-                    //           //     `<span style="color:red">${this.keyword}</span>`
-                    //           // );暂时弃用类型用户名搜索高亮展示有bug
-                    //       }
-                    // });
-                    // return;
-                // } else if (!this.keyword) {
-                    // this.keyarr = [];
-                    // this.$message.warning("搜索内容不能为空哦！");
-
-                // }
-            // },
             showtime() {
-                this.beginnowtime = setInterval(() => {
+                this.begin_now_time = setInterval(() => {
                     let cnday;
                     let date = new Date();
                     let year = date.getFullYear(); //获取当前年份
@@ -342,8 +251,8 @@
                             break;
                     }
 
-                    this.nowtime = `${h}:${m}:${s}`;
-                    this.daydate = `${year}/${mon}/${da}    ${cnday}`;
+                    this.now_time = `${h}:${m}:${s}`;
+                    this.day_date = `${year}/${mon}/${da}    ${cnday}`;
                 }, 1000);
             }
         },
@@ -359,7 +268,7 @@
             this.backgroundStyle = this.$store.getters.backgroundStyle;
         },
         beforeDestroy() {
-            clearInterval(this.beginnowtime);
+            clearInterval(this.begin_now_time);
         },
     };
 </script>
@@ -396,7 +305,7 @@
         font-size: 0.875rem;
         margin-bottom: 1.25rem;
     }
-    .indexmain {
+    .index-main {
         height: 120vh;
     }
     .empty-block {
@@ -406,7 +315,7 @@
     .search {
         height: 9.375rem;
         width: 100%;
-        .nowtime {
+        .now-time {
             width: 6.25rem;
             height: 4.375rem;
             margin: 0 auto;
@@ -414,12 +323,12 @@
             z-index: 2;
             top: 1.25rem;
         }
-        .nowtime h1 {
+        .now-time h1 {
             font-weight: 100;
             color: white;
             white-space: nowrap;
         }
-        .nowtime p {
+        .now-time p {
             position: absolute;
             white-space: nowrap;
             color: white;
@@ -466,7 +375,7 @@
         top: 10vh;
         position: relative;
         background-color: rgba(255, 255, 255, 0.7);
-        .bestvideo {
+        .best-video {
             height: 25rem;
             width: 18.75rem;
             background-color: rgba(250, 235, 215, 0.7);
@@ -475,17 +384,17 @@
             position: absolute;
             top: 1.875rem;
             transition: all 0.2s ease-in-out;
-            .biaoti img {
+            .best-video-title img {
                 position: absolute;
                 top: 1.5rem;
                 left: 4.375rem;
             }
-            .biaoti h3 {
+            .best-video-title h3 {
                 color: #f28123;
                 text-align: center;
                 margin-top: 1.25rem;
             }
-            .bestuser i span {
+            .best-video-user i span {
                 position: absolute;
                 right: 4rem;
                 top: 4.375rem;
@@ -496,13 +405,13 @@
                 text-align: right;
                 color: #409eff;
             }
-            .bestuser i:nth-child(1) img {
+            .best-video-user i:nth-child(1) img {
                 position: absolute;
                 right: 0.75rem;
                 top: 2.125rem;
                 transform: rotate(28deg);
             }
-            .bestuser i:nth-child(2) img {
+            .best-video-user i:nth-child(2) img {
                 position: absolute;
                 right: 0.9375rem;
                 top: 3.125rem;
@@ -511,8 +420,8 @@
                 object-fit: cover;
                 border-radius: 50%;
             }
-            .bestvideomain {
-                .bestvideotitle h4 {
+            .best-video-main {
+                .best-video-title-real h4 {
                     color: #f5b93b;
                     position: absolute;
                     top: 16.5625rem;
@@ -523,7 +432,7 @@
                     white-space: nowrap;
                     text-overflow: ellipsis;
                 }
-                .eachvideo {
+                .each-video {
                     width: 13.75rem;
                     height: 9.375rem;
                     display: inline-block;
@@ -579,7 +488,7 @@
                     .v-icon {
                         width: 3.125rem;
                         height: 3.125rem;
-                        background: url("../../assets/index/play.png") no-repeat;
+                        background: url("/img/icons/play.png") no-repeat;
                         background-size: cover;
                         position: absolute;
                         left: 5.3125rem;
@@ -587,39 +496,39 @@
                         opacity: 0;
                     }
                 }
-                .eachvideo img {
+                .each-video img {
                     border-radius: 0.625rem;
                     object-fit: cover;
                 }
-                .bestvideomessage ul {
+                .best-video-message ul {
                     position: absolute;
                     top: 19.0625rem;
                     left: 1.875rem;
                     list-style: none;
                 }
-                .bestvideomessage li:nth-child(1),
-                .bestvideomessage li:nth-child(2),
-                .bestvideomessage li:nth-child(3) {
+                .best-video-message li:nth-child(1),
+                .best-video-message li:nth-child(2),
+                .best-video-message li:nth-child(3) {
                     color: #559ad5;
                 }
-                .bestvideomessage ul li span {
+                .best-video-message ul li span {
                     font-weight: normal;
                     font-size: 0.8125rem;
                     position: relative;
                     left: 0.3125rem;
                     top: -0.0625rem;
                 }
-                .bestvideomessage ul li i:nth-child(2) {
+                .best-video-message ul li i:nth-child(2) {
                     position: relative;
                     left: 8.4375rem;
                     top: -0.0625rem;
                 }
-                .bestvideomessage ul li i:nth-child(2) img {
+                .best-video-message ul li i:nth-child(2) img {
                     position: relative;
                     left: 0rem;
                     top: 0.3125rem;
                 }
-                .bestvideomessage ul li i:nth-child(2) span {
+                .best-video-message ul li i:nth-child(2) span {
                     font-style: normal;
                     position: relative;
                     left: 0.3125rem;
@@ -627,7 +536,7 @@
                 }
             }
         }
-        .bestvideo:hover {
+        .best-video:hover {
             box-shadow: 0.3125rem 0.3125rem 0.4375rem rgba(71, 70, 70, 0.6);
         }
         .video-list {
@@ -638,11 +547,11 @@
             overflow: hidden;
             overflow-x: scroll;
             overflow-y: unset;
-            .containeachvideo {
+            .contain-each-video {
                 width: 53.75rem;
                 margin-top: 1.25rem;
                 position: relative;
-                .videomessage {
+                .video-message {
                     height: 9.375rem;
                     width: 37.5rem;
                     position: absolute;
@@ -651,18 +560,17 @@
                     right: 0.625rem;
                     top: 0.625rem;
                     transition: all 0.2s ease-in-out;
-                    .videotitle {
+                    .video-title {
                         margin-top: 0.625rem;
                         text-align: center;
                         color: #409eff;
                     }
-                    .videocontent {
+                    .video-content {
                         width: 31.25rem;
                         height: 4.375rem;
-                        margin-top: 1.25rem;
-                        margin: 0 auto;
+                        margin: 1.25rem auto 0 auto;
                     }
-                    .videocontent p {
+                    .video-content p {
                         width: 13.125rem;
                         color: #559ad5;
                         white-space: nowrap;
@@ -670,24 +578,24 @@
                         text-overflow: ellipsis;
                     }
 
-                    .typeanduser .videotype i {
+                    .type-user .video-type i {
                         position: absolute;
                         bottom: 1.75rem;
                         left: 1.25rem;
                     }
-                    .typeanduser .videotype span {
+                    .type-user .video-type span {
                         position: absolute;
                         bottom: 1.875rem;
                         left: 2.5rem;
                         font-size: 0.875rem;
                         color: #66c3ff;
                     }
-                    .typeanduser .videouser i {
+                    .type-user .video-user i {
                         position: absolute;
                         bottom: 1.625rem;
                         right: 6.875rem;
                     }
-                    .typeanduser .videouser span {
+                    .type-user .video-user span {
                         display: block;
                         width: 5.625rem;
                         height: 1.25rem;
@@ -701,23 +609,23 @@
                         font-size: 0.875rem;
                         color: #66c3ff;
                     }
-                    .sangezhibiao {
+                    .video-popular-get {
                         height: 1.875rem;
                         width: 37.5rem;
                         position: absolute;
                         bottom: 0;
                     }
-                    .sangezhibiao ul {
+                    .video-popular-get ul {
                         list-style: none;
                     }
-                    .sangezhibiao ul li {
+                    .video-popular-get ul li {
                         color: #559ad5;
                         margin: 0 0.8125rem;
                         font-size: 0.8125rem;
                         float: right;
                         line-height: 1.875rem;
                     }
-                    .sangezhibiao ul li:nth-child(4) {
+                    .video-popular-get ul li:nth-child(4) {
                         color: #559ad5;
                         margin: 0 0.8125rem;
                         font-size: 0.8125rem;
@@ -725,11 +633,11 @@
                         line-height: 1.875rem;
                     }
                 }
-                .videomessage:hover {
+                .video-message:hover {
                     box-shadow: 0.3125rem 0.3125rem 0.4375rem rgba(71, 70, 70, 0.6);
                 }
             }
-            .eachvideo {
+            .each-video {
                 width: 12.5rem;
                 height: 9.375rem;
                 display: inline-block;
@@ -782,7 +690,7 @@
                 .v-icon {
                     width: 3.125rem;
                     height: 3.125rem;
-                    background: url("../../assets/index/play.png") no-repeat;
+                    background: url("/img/icons/play.png") no-repeat;
                     background-size: cover;
                     position: absolute;
                     left: 4.6875rem;
@@ -790,14 +698,14 @@
                     opacity: 0;
                 }
             }
-            .eachvideo img {
+            .each-video img {
                 border-radius: 0.625rem;
                 object-fit: cover;
                 width: 100%;
                 height: 100%;
             }
         }
-        .choosepage {
+        .choose-page {
             margin-left: calc(100% - 505px);
             margin-top: 20px;
         }

@@ -15,7 +15,7 @@
                             class="contain-each-video"
                     >
                         <span class="ranking">热度第{{ index + 1 }}</span>
-                        <i class="ranking-hot"><img src="../../assets/index/hot.png" alt="图片加载失败"/></i>
+                        <i class="ranking-hot"><img src="/img/icons/hot.png" alt="图片加载失败"/></i>
                         <div class="each-video">
                             <a
                                     class="v-lnk"
@@ -28,7 +28,7 @@
                                         alt="封面加载错误"
                                 />
                                 <div class="v-overlay"></div>
-                                <span class="v-icon"></span>
+                                <span class="v-icon" style=""></span>
                             </a>
                             <div class="video-message">
                                 <h3 class="video-title">{{ item.vtitle }}</h3>
@@ -43,11 +43,11 @@
                                 </div>
                                 <div class="type-and-user">
                                     <div class="video-type">
-                                        <i><img src="../../assets/index/game.png" alt="图片加载失败"/></i>
+                                        <i><img src="/img/icons/game.png" alt="图片加载失败"/></i>
                                         <span>{{ item.videotype }}</span>
                                     </div>
                                     <div class="video-user">
-                                        <i><img src="../../assets/index/user.png" alt="图片加载失败"/></i>
+                                        <i><img src="/img/icons/user.png" alt="图片加载失败"/></i>
                                         <span>{{ item.username }}</span>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                             评论：{{ item.cnum }}
                                         </li>
                                         <li>
-                                            发布日期：{{ new Date(item.createtime).toLocaleDateString() }}
+                                            发布日期：{{ new Date(item.create_time).toLocaleDateString() }}
                                         </li>
                                     </ul>
                                 </div>
@@ -104,7 +104,7 @@
                                 <span @click.stop="watchThisUser(item.uid)" class="user-message-span-name-ranking">{{ item.user_name }}</span>
                                 <span class="user-message-span-else-ranking">
                                 <span style="line-height: 16px">
-                                    <img :src="item.user_gender===0?'../../img/icons/wan_sex_unknow.png':(item.user_gender===1?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="" width="16" height="16"/>
+                                    <img :src="item.user_gender===0?'/img/icons/gender_unknow.png':(item.user_gender===1?'/img/icons/gender_man.png':'/img/icons/gender_woman.png')" alt="" width="16" height="16"/>
                                 </span>
                                 <span style="color: #ffd048;padding-left: 20px;font-size: 16px;line-height: 16px">{{item.user_age}}</span>
                             </span>
@@ -149,70 +149,15 @@
                 user_info: {},
                 backgroundStyle: "",
                 best_video_list: [],
-                user_list: [],
-                // best_video_list:[],
-                // userlist:[],
+                user_list: []
             };
         },
         methods: {
-            // getuserpaiming() {
-            // 	this.axios("/getuserpaiming")
-            // 		.then((res) => {
-            // 			//  console.log(res.data);
-            // 			switch (res.data.code) {
-            // 				case 1:
-            // 					this.userlist = res.data.userlist;
-            // 					this.userlist.forEach((item, index, userlist) => {
-            // 						switch (item.gender) {
-            // 							case 0:
-            // 								userlist[index].gender =
-            // 									"../../img/icons/wan_sex_unknow.png";
-            // 								break;
-            // 							case 1:
-            // 								userlist[index].gender =
-            // 									"../../img/icons/wan_sex_m.png";
-            // 								break;
-            // 							case 2:
-            // 								userlist[index].gender =
-            // 									"../../img/icons/wan_sex_w.png";
-            // 								break;
-            // 							default:
-            // 								break;
-            // 						}
-            // 					});
-            // 					//  console.log(this.userlist);
-            // 					break;
-            // 				case 0:
-            // 					this.$message.error(res.data.Msg);
-            // 					break;
-            // 				default:
-            // 					break;
-            // 			}
-            // 		})
-            // 		.catch((err) => {
-            // 			console.log(err);
-            // 		});
-            // },
             async getUsersMessage() {
                 let res = await getUserRanking().then(res => res).catch((err) => {console.log(err)});
                 if(res){
                     if(res.code===200){
                         this.user_list = deepClone(res.data.userList);
-                        // this.user_list.forEach((item, index) => {
-                        //     switch (item.gender) {
-                        //         case 0:
-                        //             item.gender = "../../img/icons/wan_sex_unknow.png";
-                        //             break;
-                        //         case 1:
-                        //             item.gender = "../../img/icons/wan_sex_m.png";
-                        //             break;
-                        //         case 2:
-                        //             item.gender = "../../img/icons/wan_sex_w.png";
-                        //             break;
-                        //         default:
-                        //             break;
-                        //     }
-                        // });
                     } else {
                         this.$message.error(res.message);
                     }
@@ -223,9 +168,6 @@
                 this.$router.push(`/user-zone?uid=${uid}`);
             },
             async searchUserBestVideo(uid) {
-                // this.axios("/searchuserbestvideo", {
-                // 	params: {searchuid: uid},
-                // })
                 let res = await getUserBestVideo({searchUserId: uid}).then(res => res).catch((err) => {console.log(err)});
                 if(res){
                     if(res.code===200){
@@ -234,22 +176,6 @@
                         this.$message.error(res.message);
                     }
                 }
-                // .then((res) => {
-                // 	// console.log(res.data);
-                // 	switch (res.data.code) {
-                // 		case 1:
-                // 			this.best_video_list = res.data.best_video_list;
-                // 			break;
-                // 		case 0:
-                // 			this.$$message.error(res.data.Msg);
-                // 			break;
-                // 		default:
-                // 			break;
-                // 	}
-                // })
-                // .catch((err) => {
-                // 	console.log(err);
-                // });
             }
         },
         created() {
@@ -471,7 +397,7 @@
             .v-icon {
                 width: 3.125rem;
                 height: 3.125rem;
-                background: url("../../assets/index/play.png") no-repeat;
+                background: url("/img/icons/play.png") no-repeat;
                 background-size: cover;
                 position: absolute;
                 left: 4.6875rem;

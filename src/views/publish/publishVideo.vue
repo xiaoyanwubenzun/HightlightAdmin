@@ -197,7 +197,7 @@
     import { createVideoArticle } from "@/api/video";
     import { deepClone } from "@/utils";
     import E from "wangeditor";
-    import emoji from "../../assets/emoji/emojin.json";
+    import emoji from "@/assets/emoji/emojin.json";
     export default {
         name: "publishVideo",
         components: { HighlightHeader },
@@ -531,7 +531,7 @@
 <style lang="scss">
     .upload-main {
         height: 100vh;
-        background-image: url("../../assets/uploadhightlight/background.jpg");
+        background-image: url("/img/backgroundImage/background_publish_video.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

@@ -8,7 +8,7 @@
                     <span @click.stop="watchVideo(user_info.uid)">
 						{{user_info.username}}
 					</span>
-                    <i><img :src="user_info.gender===0?'../../img/icons/wan_sex_unknow.png':(user_info.gender===1?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="" /></i>
+                    <i><img :src="user_info.gender===0?'/img/icons/gender_unknow.png':(user_info.gender===1?'/img/icons/gender_man.png':'/img/icons/gender_woman.png')" alt="" /></i>
                 </div>
                 <div class="author-popular-get">
                     <ul>
@@ -56,7 +56,7 @@
                         <ul>
                             <li>
                                 <i class="el-icon-date"></i>
-                                <span>{{new Date(video.createtime).toLocaleDateString()}}</span>
+                                <span>{{new Date(video.create_time).toLocaleDateString()}}</span>
                             </li>
                             <li>
                                 <i class="el-icon-video-play"></i>
@@ -77,73 +77,104 @@
                 <div class="popular-point">
                     <ul>
                         <li>
-                            <i><img src="../../assets/icons/game.png" alt="" /></i>
+                            <i><img src="/img/icons/game.png" alt="" /></i>
                             <span>
 								{{ video.videotype }}
 							</span>
                         </li>
                         <li @click="openAddComment()">
                             <i class="el-icon-chat-dot-square"></i>
-                            <span>评论：</span>
-                            {{video_comment_list.length }}
+                            <span style="vertical-align: middle">评论：</span>
+                            <span style="vertical-align: middle">
+                                {{video_comment_list.length }}
+                            </span>
                         </li>
                         <li @click="addLikeCountWeb()">
                             <i class="el-icon-star-off"></i>
-                            <span>点赞：</span>
-                            <span>
+                            <span style="vertical-align: middle">点赞：</span>
+                            <span style="vertical-align: middle">
 								{{ video.likecount }}
 							</span>
                         </li>
                     </ul>
                 </div>
                 <div class="video-content" v-html="video_content"></div>
+                <div :class="comment_style">
+                    <span style="width: 100%;padding-right: 10%">
+                        <el-input
+                                type="text"
+                                placeholder="发个友善的评论吧(Enter)"
+                                v-model="comment"
+                                maxlength="200"
+                                show-word-limit
+                                size="small"
+                                @keydown.enter.native="addComment()"
+                        >
+                        </el-input>
+                    </span>
+                    <span>
+                        <el-button
+                                @click="addComment()"
+                                class="comment-button"
+                                type="primary"
+                                size="small"
+                                icon="el-icon-s-promotion"
+                        >
+                            发表
+                        </el-button>
+                    </span>
+                </div>
             </div>
             <div class="comment-area">
                 <template v-if="video_comment_list.length>0">
                     <div
-                            v-for="item in video_comment_list"
-                            :key="item.cid"
-                            class="each-comment clear-float"
+                        v-for="item in video_comment_list"
+                        :key="item.cid"
+                        class="each-comment"
+                        style="display: flex;justify-content: space-between"
                     >
-                        <img :src="item.userimg" alt="图片" />
-                        <span>{{ item.username }}</span>
-                        <div class="comment-content">
-                            <p>{{ item.content }}</p>
+                        <div style="padding: 10px 0 0 10px">
+                            <img class="user-head-img" :src="item.userimg" alt="图片" />
                         </div>
-                        <p class="comment-createtime">
-                            {{ new Date(item.createtime).toLocaleString() }}
-                        </p>
+                        <div style="width: 100%;padding: 10px 0">
+                            <div style="display: flex;justify-content: space-between">
+                                <span>
+                                    <span style="padding: 0 10px">{{ item.username }}</span>
+                                    <span>{{ new Date(item.create_time).toLocaleString() }}</span>
+                                </span>
+                                <span class="comment-like" style="padding-right: 20px">
+                                    <span style="font-size: 16px;padding-right: 5px;vertical-align: top"></span>
+                                    <img class="comment-like-clicked" src="/img/icons/comment_like_white.png" alt="" width="16px" height="16px">
+                                </span>
+                            </div>
+                            <div class="comment-content">
+                                <p>{{ item.comment_content }}</p>
+                            </div>
+                        </div>
                     </div>
                 </template>
                 <template v-else>
-                    <div class="each-comment clear-float">
-                        <img src="http://localhost:8090/public/imgupload/defaultuserimg.jpg" alt="图片" />
-                        <span>默认用户</span>
-                        <div class="comment-content">
-                            <p>还没有评论哦</p>
+                    <div class="each-comment" style="display: flex;justify-content: space-between">
+                        <div style="padding: 10px 0 0 10px">
+                            <img class="user-head-img" src="http://localhost:8090/public/imgupload/defaultuserimg.jpg" alt="图片" />
                         </div>
-                        <p class="comment-create-time">1998/6/29 20:30:00</p>
+                        <div style="width: 100%;padding: 10px 0">
+                            <div style="display: flex;justify-content: space-between">
+                                <span>
+                                    <span style="padding: 0 10px">默认用户</span>
+                                    <span>1998/6/29 20:30:00</span>
+                                </span>
+                                <span class="comment-like" style="padding-right: 20px">
+                                    <span style="font-size: 16px;padding-right: 5px;vertical-align: top"></span>
+                                    <img class="comment-like-clicked" src="/img/icons/comment_like_white.png" alt="" width="16px" height="16px">
+                                </span>
+                            </div>
+                            <div class="comment-content">
+                                <p>还没有评论哦</p>
+                            </div>
+                        </div>
                     </div>
                 </template>
-            </div>
-            <div :class="comment_style">
-                <el-input
-                        type="text"
-                        placeholder="发个友善的评论吧(Enter)"
-                        v-model="comment"
-                        maxlength="200"
-                        show-word-limit
-                        @keydown.enter.native="addComment()"
-                >
-                </el-input>
-                <el-button
-                        @click="addComment()"
-                        class="comment-button"
-                        type="primary"
-                        icon="el-icon-s-promotion"
-                >
-                    发表
-                </el-button>
             </div>
         </div>
     </div>
@@ -226,15 +257,7 @@
             };
         },
         components: { HighlightHeader },
-        computed: {
-            // format_constellation(){
-            //     console.log(this.user_info)
-            //     return this.constellation_options[this.user_info.consttell].label;
-            // },
-            // format_gender_img(){
-            //     return this.user_info.gender===0?"../../img/icons/wan_sex_unknow.png":(this.user_info.gender===1?"../../img/icons/wan_sex_m.png":"../../img/icons/wan_sex_w.png");
-            // }
-        },
+        computed: {},
         methods: {
             async getVideoMessage() {
                 let player;
@@ -326,7 +349,7 @@
                 }
             },
             async refreshComment() {
-                let res = await getCommentList({vid: this.vid}).then(res => res).catch((err) => {console.log(err)});
+                let res = await getCommentList({what_id: this.vid, comment_type: 1}).then(res => res).catch((err) => {console.log(err)});
                 if(res){
                     if(res.code===200){
                         this.video_comment_list = deepClone(res.data.comment);
@@ -572,7 +595,7 @@
             }
             .video-content {
                 width: 39vw;
-                height: 10vh;
+                height: 8vh;
                 /*height: 108px;*/
                 overflow: scroll;
                 margin: 0 auto;
@@ -598,26 +621,28 @@
                 background-color: rgb(255, 255, 255, 0.7);
                 border-radius: 5px;
                 transition: all 0.2s ease-in-out;
-                img {
+                .user-head-img {
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
                     float: left;
                     object-fit: cover;
                 }
+                .comment-like-clicked,.comment-like-none {
+                    cursor: pointer;
+                }
                 span {
                     font-size: 12px;
-                    color: darkred;
+                    font-weight: 700;
+                    color: gray;
+                    font-family: "KaiTi";
                 }
                 .comment-content {
-                    margin-top: 10px !important;
                     width: 70%;
-                    margin: 0 auto;
+                    padding: 10px 0 0 20px;
                     p {
                         font-size: 12px;
-                        font-weight: 700;
-                        color: gray;
-                        font-family: "KaiTi";
+                        color: darkred;
                     }
                 }
                 .comment-create-time {
@@ -630,23 +655,25 @@
             }
         }
         .comment {
+            display: flex;
+            justify-content: space-between;
             position: absolute;
-            bottom: 170px;
-            right: -200px;
-            width: 13vw;
+            right: -39vw;
+            width: 39vw;
+            margin: 0 auto;
             transition: all 1s ease-out;
         }
         .show-add-comment {
+            display: flex;
+            justify-content: space-between;
             position: absolute;
-            bottom: 170px;
-            right: 115px;
-            width: 13vw;
-            transition: all 1s ease-out;
+            right: 5.5vw;
+            width: 39vw;
+            margin: 0 auto;
+            transition: all 1s ease-in-out;
         }
         .comment-button {
-            position: absolute;
-            right: -100px;
-            bottom: 0;
+            display: inline-block;
         }
     }
 </style>

@@ -37,7 +37,7 @@
 							<span class="user-message-span-name-header">{{ user_info.user_name }}</span>
 							<span class="user-message-span-else-header">
 								<span style="line-height: 16px">
-									<img :src="user_info.user_gender===0?'../../img/icons/wan_sex_unknow.png':(user_info.user_gender===1?'../../img/icons/wan_sex_m.png':'../../img/icons/wan_sex_w.png')" alt="" width="16" height="16"/>
+									<img :src="user_info.user_gender===0?'/img/icons/gender_unknow.png':(user_info.user_gender===1?'/img/icons/gender_man.png':'/img/icons/gender_woman.png')" alt="" width="16" height="16"/>
 								</span>
 								<span style="color: #ffd048;padding-left: 20px;font-size: 15px;line-height: 15px">{{user_info.user_age}}</span>
 							</span>
@@ -190,19 +190,6 @@
 				if(res){
 					if (res.code === 200) {
 						this.user_info = deepClone(this.$store.getters.user_info);
-						// switch (this.user_info.user_gender) {
-						// 	case 0:
-						// 		this.user_info.user_gender ="./img/icons/wan_sex_unknow.png";
-						// 		break;
-						// 	case 1:
-						// 		this.user_info.user_gender ="./img/icons/wan_sex_m.png";
-						// 		break;
-						// 	case 2:
-						// 		this.user_info.user_gender ="./img/icons/wan_sex_w.png";
-						// 		break;
-						// 	default:
-						// 		break;
-						// }
 						this.$emit("send",this.user_info);
 					} else {
 						this.$message.error(res.message);
@@ -220,24 +207,6 @@
 		created() {
 			// console.log("created");
 			this.getUserInfo();
-			// if(this.$store.getters.user_info){
-			// 	this.user_info = deepClone(this.$store.getters.user_info);
-			// 	switch (this.user_info.user_gender) {
-			// 		case 0:
-			// 			this.user_info.user_gender ="./img/icons/wan_sex_unknow.png";
-			// 			break;
-			// 		case 1:
-			// 			this.user_info.user_gender ="./img/icons/wan_sex_m.png";
-			// 			break;
-			// 		case 2:
-			// 			this.user_info.user_gender ="./img/icons/wan_sex_w.png";
-			// 			break;
-			// 		default:
-			// 			break;
-			// 	}
-			// 	// console.log(this.user_info);
-			// }
-			// console.log(this.$router)
 		},
 		beforeMount() {
 			// console.log("beforeMount");
