@@ -11,7 +11,7 @@
 		>
 			<template v-for="(item,index) in routes_list">
 				<template v-if="item.children.length>0">
-					<el-submenu :index="item.path">
+					<el-submenu :index="item.path" :key="index">
 						<template slot="title">{{item.meta.name}}</template>
 						<el-menu-item v-for="(one_level_children,one_level_children_index) in item.children" :index="one_level_children.path" :key="one_level_children_index">
 							{{one_level_children.meta.name}}
